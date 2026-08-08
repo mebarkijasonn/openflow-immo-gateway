@@ -1,0 +1,41 @@
+reference: ROUEN-DEMO-001
+
+titre: Maison contemporaine à Rouen
+
+prix: 489000
+
+surface: 168
+
+pieces: 6
+
+chambres: 4
+
+salles_de_bain: 2
+
+garage: Oui
+
+jardin: Oui
+
+surface_jardin: 620
+
+chauffage: Pompe à chaleur
+
+DPE: B
+
+taxe_fonciere: Inconnue
+
+charges: Inconnues
+
+annee_construction: Inconnue
+
+travaux: Aucun connu
+
+quartier: Quartier résidentiel
+
+ecoles: Oui
+
+transports: Oui
+
+description: Maison contemporaine utilisée pour la démonstration OpenFlow Immo.
+
+disponible: Oui
