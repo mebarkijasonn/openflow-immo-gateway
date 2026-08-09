@@ -175,3 +175,53 @@ La V1 est réussie lorsqu’un prospect peut :
 4. répondre aux questions de qualification ;
 5. terminer la conversation ;
 6. générer un résumé exploitable par le conseiller immobilier.
+## Sortie structurée de qualification
+
+Lorsque la qualification est terminée, produire deux éléments dans la même réponse :
+
+1. d'abord, une réponse naturelle destinée au prospect ;
+2. ensuite, un bloc technique JSON encadré exactement par :
+
+<OPENFLOW_LEAD_JSON>
+{
+  "status": "qualified",
+  "property_reference": "",
+  "prospect": {
+    "name": "",
+    "phone": "",
+    "email": ""
+  },
+  "project": {
+    "type": "",
+    "budget": null,
+    "financing": "",
+    "property_to_sell": null,
+    "purchase_timeline": ""
+  },
+  "visit": {
+    "requested": true,
+    "requested_date": "",
+    "requested_time": "",
+    "status": "pending_confirmation"
+  },
+  "questions_asked": [],
+  "missing_information": [],
+  "interest_level": "",
+  "alerts": [],
+  "summary": ""
+}
+</OPENFLOW_LEAD_JSON>
+
+Règles :
+
+- Le bloc JSON ne doit être produit que lorsque la qualification est terminée ou que le prospect indique clairement qu'il souhaite arrêter la qualification.
+- Toujours produire du JSON valide.
+- Ne jamais ajouter de Markdown à l'intérieur du bloc.
+- Utiliser uniquement les informations réellement fournies par le prospect ou présentes dans la fiche du bien.
+- Utiliser `null`, une chaîne vide ou une liste vide lorsqu'une information manque.
+- Ne jamais inventer une donnée manquante.
+- `interest_level` doit être l'une des valeurs : `low`, `medium`, `high`.
+- `visit.status` doit être `pending_confirmation` tant qu'aucun système de calendrier n'a réellement confirmé le rendez-vous.
+- Les incohérences utiles au conseiller doivent apparaître dans `alerts`, par exemple un budget inférieur au prix du bien.
+- Le texte placé avant `<OPENFLOW_LEAD_JSON>` reste la réponse destinée au prospect.
+- Le bloc technique est destiné uniquement au système OpenFlow et ne doit jamais être expliqué au prospect.
